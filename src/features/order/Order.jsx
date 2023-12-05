@@ -1,5 +1,3 @@
-// Test ID: IIDSAT
-
 import { useLoaderData } from "react-router-dom";
 import { getOrder } from "../../services/apiRestaurant";
 import {

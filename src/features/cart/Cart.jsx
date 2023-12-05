@@ -10,6 +10,7 @@ function Cart() {
   const username = useSelector((store) => store.user.username);
   const dispatch = useDispatch();
 
+  //test using via useSelector
   function handleClearCart() {
     dispatch(clearCart());
   }
