@@ -2,7 +2,7 @@ import { useFetcher } from "react-router-dom";
 import Button from "../../ui/Button";
 import { updateOrder } from "../../services/apiRestaurant";
 
-const UpdateOrder = ({ order }) => {
+function UpdateOrder({ order }) {
   const fetcher = useFetcher();
 
   return (
@@ -10,7 +10,7 @@ const UpdateOrder = ({ order }) => {
       <Button type="primary">Make priority</Button>
     </fetcher.Form>
   );
-};
+}
 
 export default UpdateOrder;
 

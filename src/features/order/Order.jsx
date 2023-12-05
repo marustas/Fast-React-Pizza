@@ -1,11 +1,11 @@
 import { useFetcher, useLoaderData } from "react-router-dom";
+import OrderItem from "./OrderItem";
 import { getOrder } from "../../services/apiRestaurant";
 import {
   calcMinutesLeft,
   formatCurrency,
   formatDate,
 } from "../../utils/helpers";
-import OrderItem from "./OrderItem";
 import { useEffect } from "react";
 import UpdateOrder from "./UpdateOrder";
 
@@ -29,6 +29,7 @@ function Order() {
     estimatedDelivery,
     cart,
   } = order;
+
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
 
   return (
@@ -49,7 +50,7 @@ function Order() {
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-2 bg-stone-200 px-6 py-5">
-        <p className="font-medium ">
+        <p className="font-medium">
           {deliveryIn >= 0
             ? `Only ${calcMinutesLeft(estimatedDelivery)} minutes left 😃`
             : "Order should have arrived"}
@@ -61,13 +62,13 @@ function Order() {
       <ul className="divide-y divide-stone-200 border-b border-t">
         {cart.map((item) => (
           <OrderItem
+            item={item}
+            key={item.pizzaId}
             isLoadingIngredients={fetcher.state === "loading"}
             ingredients={
               fetcher?.data?.find((elem) => elem.id === item.pizzaId)
                 ?.ingredients ?? []
             }
-            item={item}
-            key={item.pizzaId}
           />
         ))}
       </ul>
@@ -90,7 +91,8 @@ function Order() {
 }
 
 export async function loader({ params }) {
-  const order = await getOrder(params.orderIdD);
+  const order = await getOrder(params.orderId);
   return order;
 }
+
 export default Order;
